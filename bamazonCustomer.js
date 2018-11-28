@@ -61,12 +61,13 @@ const getUserResponse = () => {
                 inquirer.prompt([{
                     name: "confirm",
                     type: "confirm",
-                    message: "Your cost is $" + cost + " Do you wish to proceed?"
+                    message: "Your cost is $" + cost + " Do you wish to proceed?",
+                    default: "true"
 
 
                 }]).then(finalAnswer => {
                     let quantityLeft = res[0].stock_quantity -= quantityChosen;
-                    if (finalAnswer) {
+                    if (finalAnswer.confirm === true) {
                         console.log("OK GREAT! Bamazon now has " + quantityLeft + " of those left!");
                         connection.query("UPDATE bamazon.products SET ? WHERE ?", [{
                                 stock_quantity: quantityLeft
@@ -79,8 +80,11 @@ const getUserResponse = () => {
                                 throw err;
                             }
                         }
+                    } else if (finalAnswer.confirm === false) {
+                        console.log("\nDon't want it anymore? That's ok. Those who live their life in pursuit of material possessions are never content! Have a good one.\n");
+                        connection.end();
                     }
-                })
+                });
 
             }})
         })
