@@ -1,5 +1,10 @@
 # bamazon
 
+See video link of this app in action! https://www.youtube.com/watch?v=pT8nEmAFKOg
+
+Instructions for assignment below
+==================================
+
 # Node.js & MySQL
 
 ## Overview
